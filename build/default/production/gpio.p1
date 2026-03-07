@@ -1485,24 +1485,24 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic.h: 186: extern unsigned char __resetbits;
 [; ;pic.h: 187: extern __bit __powerdown;
 [; ;pic.h: 188: extern __bit __timeout;
-"11 gpio.c
+"10 gpio.c
+[p x LVP=OFF ]
+"11
 [v _main `(v ~T0 @X0 1 ef ]
 {
 [; ;gpio.c: 11: void main(void) {
 [e :U _main ]
 [f ]
 "14
-[; <"     CBLOCK 0x20 ;# ">
 "15
-[; <"         COUNTER ;# ">
+[; <"     BSF STATUS,6 ;# ">
 "16
-[; <"     ENDC ;# ">
-"17
-[; <"   BSF STATUS,6 ;# ">
-"18
 [; <"   BSF STATUS,5 ;# ">
+"17
+"18
+[; <"    CLRF ANSEL ;# ">
 "19
-[; <"   BCF ANSELH,4 ;# ">
+[; <"   CLRF ANSELH ;# ">
 "20
 [; <"   BCF STATUS,6 ;# ">
 "21
@@ -1526,9 +1526,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "31
 [; <"   INC_CNTR: ;# ">
 "32
-[; <"   INCF 0x20h,1 ;# ">
+[; <"   INCF 0x20,F ;# ">
 "33
-[; <"   MOVF 0x20h,0 ;# ">
+[; <"   MOVF 0x20,W ;# ">
 "34
 [; <"   MOVWF PORTD ;# ">
 "35
