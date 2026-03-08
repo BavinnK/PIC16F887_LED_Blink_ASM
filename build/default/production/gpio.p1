@@ -1488,65 +1488,69 @@ Version 3.2 HI-TECH Software Intermediate Code
 "10 gpio.c
 [p x LVP=OFF ]
 "11
+[p x WDTE=OFF ]
+"13
+[p x FOSC=INTRC_NOCLKOUT ]
+"14
 [v _main `(v ~T0 @X0 1 ef ]
 {
-[; ;gpio.c: 11: void main(void) {
+[; ;gpio.c: 14: void main(void) {
 [e :U _main ]
 [f ]
-"14
-"15
-[; <"     BSF STATUS,6 ;# ">
-"16
-[; <"   BSF STATUS,5 ;# ">
 "17
 "18
-[; <"    CLRF ANSEL ;# ">
+[; <"     BSF STATUS,6 ;# ">
 "19
-[; <"   CLRF ANSELH ;# ">
+[; <"   BSF STATUS,5 ;# ">
 "20
-[; <"   BCF STATUS,6 ;# ">
 "21
-[; <"   BSF TRISB,0 ;# ">
+[; <"    CLRF ANSEL ;# ">
 "22
-[; <"   CLRF TRISD ;# ">
+[; <"   CLRF ANSELH ;# ">
 "23
-[; <"   BCF STATUS,5 ;# ">
+[; <"   BCF STATUS,6 ;# ">
 "24
-[; <"   CLRF 0x20 ;# ">
+[; <"   BSF TRISB,0 ;# ">
 "25
-[; <"   CLRF PORTD ;# ">
+[; <"   CLRF TRISD ;# ">
 "26
+[; <"   BCF STATUS,5 ;# ">
 "27
-[; <"   LOOP: ;# ">
+[; <"   CLRF 0x20 ;# ">
 "28
-[; <"   BTFSC PORTB,0 ;# ">
+[; <"   CLRF PORTD ;# ">
 "29
-[; <"   GOTO INC_CNTR ;# ">
 "30
-[; <"   GOTO LOOP ;# ">
+[; <"   LOOP: ;# ">
 "31
-"32
-[; <"   INC_CNTR: ;# ">
-"33
-[; <"   INCF 0x20,F ;# ">
-"34
-[; <"   MOVF 0x20,W ;# ">
-"35
-[; <"   MOVWF PORTD ;# ">
-"36
-"37
-[; <"   WAIT: ;# ">
-"38
 [; <"   BTFSC PORTB,0 ;# ">
-"39
-[; <"   GOTO WAIT ;# ">
-"40
+"32
+[; <"   GOTO INC_CNTR ;# ">
+"33
 [; <"   GOTO LOOP ;# ">
+"34
+"35
+[; <"   INC_CNTR: ;# ">
+"36
+[; <"   INCF 0x20,F ;# ">
+"37
+[; <"   MOVF 0x20,W ;# ">
+"38
+[; <"   MOVWF PORTD ;# ">
+"39
+"40
+[; <"     WAIT: ;# ">
 "41
-[; ;gpio.c: 44: return;
+[; <"   BTFSC PORTB,0 ;# ">
+"42
+[; <"   GOTO WAIT ;# ">
+"43
+[; <"   GOTO LOOP ;# ">
 "44
+[; ;gpio.c: 47: return;
+"47
 [e $UE 139  ]
-[; ;gpio.c: 45: }
-"45
+[; ;gpio.c: 48: }
+"48
 [e :UE 139 ]
 }
