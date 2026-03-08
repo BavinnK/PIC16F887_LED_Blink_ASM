@@ -1534,23 +1534,38 @@ Version 3.2 HI-TECH Software Intermediate Code
 "36
 [; <"   INCF 0x20,F ;# ">
 "37
-[; <"   MOVF 0x20,W ;# ">
+[; <"   MOVLW 10 ;# ">
 "38
-[; <"   MOVWF PORTD ;# ">
+[; <"   SUBWF 0x20,W ;# ">
 "39
+[; <"   BTFSC STATUS,2 ;# ">
 "40
-[; <"     WAIT: ;# ">
+[; <"   GOTO INC_RESET ;# ">
 "41
-[; <"   BTFSC PORTB,0 ;# ">
+[; <"   MOVF 0x20,W ;# ">
 "42
-[; <"   GOTO WAIT ;# ">
+[; <"   MOVWF PORTD ;# ">
 "43
-[; <"   GOTO LOOP ;# ">
 "44
-[; ;gpio.c: 47: return;
+[; <"     WAIT: ;# ">
+"45
+[; <"   BTFSC PORTB,0 ;# ">
+"46
+[; <"   GOTO WAIT ;# ">
 "47
-[e $UE 139  ]
-[; ;gpio.c: 48: }
+[; <"   GOTO LOOP ;# ">
 "48
+"49
+[; <"   INC_RESET: ;# ">
+"50
+[; <"   CLRF 0x20 ;# ">
+"51
+[; <"   GOTO LOOP ;# ">
+"52
+[; ;gpio.c: 55: return;
+"55
+[e $UE 139  ]
+[; ;gpio.c: 56: }
+"56
 [e :UE 139 ]
 }

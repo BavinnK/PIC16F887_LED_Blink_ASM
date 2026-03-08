@@ -5,7 +5,7 @@ Linker command line:
 -W-3 --edf=C:\Program Files (x86)\Microchip\xc8\v1.36\dat\en_msgs.txt -cs \
   -h+dist/default/production\cc_pic887_gpio.X.production.sym \
   --cmf=dist/default/production\cc_pic887_gpio.X.production.cmf -z -Q16F887 \
-  -oC:\Users\Bavin\AppData\Local\Temp\s2dk.2 \
+  -oC:\Users\Bavin\AppData\Local\Temp\sep4.2 \
   -Mdist/default/production/cc_pic887_gpio.X.production.map -E1 -ver=XC8 \
   -ASTACK=0110h-016fh -pstack=STACK -ACODE=00h-07FFhx4 -ASTRCODE=00h-01FFFh \
   -ASTRING=00h-0FFhx32 -ACONST=00h-0FFhx32 -AENTRY=00h-0FFhx32 \
@@ -18,7 +18,7 @@ Linker command line:
   -pfunctab=CODE -ACONFIG=02007h-02008h -pconfig=CONFIG -DCONFIG=2 \
   -AIDLOC=02000h-02003h -pidloc=IDLOC -DIDLOC=2 -AEEDATA=00h-0FFh/02100h \
   -peeprom_data=EEDATA -DEEDATA=2 -DCODE=2 -DSTRCODE=2 -DSTRING=2 -DCONST=2 \
-  -DENTRY=2 -k C:\Users\Bavin\AppData\Local\Temp\s2dk.obj \
+  -DENTRY=2 -k C:\Users\Bavin\AppData\Local\Temp\sep4.obj \
   dist/default/production\cc_pic887_gpio.X.production.obj 
 
 Object code version is 3.11
@@ -28,12 +28,12 @@ Machine type is 16F887
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-C:\Users\Bavin\AppData\Local\Temp\s2dk.obj
+C:\Users\Bavin\AppData\Local\Temp\sep4.obj
                 end_init                              0        0        3        0       0
                 config                             2007     2007        1     400E       0
 dist/default/production\cc_pic887_gpio.X.production.obj
                 cinit                               7FC      7FC        4      FF8       0
-                maintext                            7E6      7E6       16      FCC       0
+                maintext                            7E0      7E0       1C      FC0       0
 
 TOTAL           Name                               Link     Load   Length     Space
         CLASS   STACK          
@@ -41,7 +41,7 @@ TOTAL           Name                               Link     Load   Length     Sp
         CLASS   CODE           
                 end_init                              0        0        3         0
                 cinit                               7FC      7FC        4         0
-                maintext                            7E6      7E6       16         0
+                maintext                            7E0      7E0       1C         0
 
         CLASS   STRCODE        
 
@@ -86,7 +86,7 @@ TOTAL           Name                               Link     Load   Length     Sp
 SEGMENTS        Name                           Load    Length   Top    Selector   Space  Class     Delta
 
                 reset_vec                      000000  000003  000003         0       0  CODE        2
-                maintext                       0007E6  000016  0007FC       FCC       0  CODE        2
+                maintext                       0007E0  00001C  0007FC       FC0       0  CODE        2
                 cinit                          0007FC  000004  000800       FF8       0  CODE        2
                 config                         002007  000001  002008      400E       0  CONFIG      2
 
@@ -98,14 +98,14 @@ UNUSED ADDRESS RANGES
         BANK1            00A0-00EF             50           1
         BANK2            0110-016F             60           1
         BANK3            0190-01EF             60           1
-        CODE             0003-07E5            7E3           2
+        CODE             0003-07DF            7DD           2
                          0800-1FFF            800
         COMMON           0070-007D              E           1
         CONFIG           2008-2008              1           2
-        CONST            0003-07E5            100           2
+        CONST            0003-07DF            100           2
                          0800-1FFF            100
         EEDATA           2100-21FF            100           2
-        ENTRY            0003-07E5            100           2
+        ENTRY            0003-07DF            100           2
                          0800-1FFF            100
         IDLOC            2000-2003              4           2
         RAM              0020-006F             50           1
@@ -117,9 +117,9 @@ UNUSED ADDRESS RANGES
         SFR2             0100-010F             10           1
         SFR3             0180-018F             10           1
         STACK            0110-016F             60           1
-        STRCODE          0003-07E5            7E3           2
+        STRCODE          0003-07DF            7DD           2
                          0800-1FFF           1800
-        STRING           0003-07E5            100           2
+        STRING           0003-07DF            100           2
                          0800-1FFF            100
 
                                   Symbol Table
@@ -202,9 +202,9 @@ __end_of__initialization  cinit        07FC
 __end_of_main             maintext     07FC
 __initialization          cinit        07FC
 __pcstackCOMMON           cstackCOMMON 0000
-__pmaintext               maintext     07E6
+__pmaintext               maintext     07E0
 __size_of_main            (abs)        0000
-_main                     maintext     07E6
+_main                     maintext     07E0
 btemp                     (abs)        007E
 end_of_initialization     cinit        07FC
 intlevel0                 functab      0000
@@ -279,7 +279,7 @@ shared
 shared estimated size: 1
 
 gpio.c
-		_main          		CODE           	07E6	0000	23
+		_main          		CODE           	07E0	0000	29
 
-gpio.c estimated size: 23
+gpio.c estimated size: 29
 
