@@ -1489,87 +1489,67 @@ Version 3.2 HI-TECH Software Intermediate Code
 [p x LVP=OFF ]
 "11
 [p x WDTE=OFF ]
-"13
+"12
 [p x FOSC=INTRC_NOCLKOUT ]
-"14
+"13
 [v _main `(v ~T0 @X0 1 ef ]
 {
-[; ;gpio.c: 14: void main(void) {
+[; ;gpio.c: 13: void main(void) {
 [e :U _main ]
 [f ]
-"17
+"16
 [; <"     MAIN_INIT: ;# ">
+"17
+[; <"     BCF STATUS,6 ;# ">
 "18
-[; <"         BSF STATUS,6 ;# ">
+[; <"     BCF STATUS,5 ;BANK0 ;# ">
 "19
-[; <"         BSF STATUS,5 ;we are at bank 3 ;# ">
+[; <"     CLRF TMR0 ;clear the counter ;# ">
 "20
-[; <"         CLRF ANSEL ;# ">
 "21
-[; <"         CLRF ANSELH ;we will clear all the bits in analog selection we dont want analog ;# ">
+[; <"         BSF STATUS,5 ;BANK1 ;# ">
 "22
-[; <"         BCF STATUS,6 ;# ">
+[; <"     BCF OPTION_REG,5 ;we will use internal osc which is 4Mhz ;# ">
 "23
-[; <"         BSF STATUS,5 ;now we are in bank 1 ;# ">
+[; <"     BCF OPTION_REG,3 ;the pcs is assigned to timer0 itself not the watchdog ;# ">
 "24
-[; <"         BSF TRISB,0 ;we set RB0 as input ;# ">
+[; <"     BSF OPTION_REG,0 ;# ">
 "25
-[; <"         CLRF TRISD ;we will set every bit on PORTD as output ;# ">
+[; <"     BSF OPTION_REG,1 ;# ">
 "26
-[; <"         BCF STATUS,5 ;we will return to bank 0 ;# ">
+[; <"     BSF OPTION_REG,2 ;now the pcs is 256 now each tick takes 256 us ;# ">
 "27
-[; <"         CLRF PORTD ;# ">
 "28
-[; <"         CLRF 0x20 ;# ">
+[; <"        BCF TRISD,4 ;make RD4 as output, its a buildin led on my custom board ;# ">
 "29
+[; <"     BCF STATUS,5 ;BANK0 ;# ">
 "30
-[; <"                    MAIN_LOOP: ;# ">
 "31
-[; <"         BTFSC PORTB,0 ;we will test RB0 if its set then dont skip, if its not set then skip ;# ">
+[; <"                  MAIN_LOOP: ;# ">
 "32
-[; <"         CALL INC_NUMBER ;# ">
+[; <"     BTFSC INTCON,2 ;# ">
 "33
-[; <"         GOTO MAIN_LOOP ;# ">
+[; <"     CALL DISPLAY ;# ">
 "34
+[; <"     GOTO MAIN_LOOP ;# ">
 "35
-[; <"                     INC_NUMBER: ;# ">
 "36
-[; <"         INCF 0x20,F ;increment the data in 0x20 add ;# ">
-"37
-[; <"         MOVLW 11 ;# ">
-"38
-[; <"         SUBWF 0x20,W ;# ">
-"39
-[; <"         BTFSC STATUS,2 ;# ">
-"40
-[; <"         CLRF 0x20 ;# ">
-"41
-[; <"         CALL DISPLAY ;# ">
-"42
-"43
-"44
-[; <"             WAIT: ;# ">
-"45
-[; <"         BTFSS PORTB,0 ;# ">
-"46
-[; <"         GOTO WAIT ;# ">
-"47
-"48
-[; <"             RETURN ;# ">
-"49
-"50
 [; <"         DISPLAY: ;# ">
-"51
-[; <"         MOVF 0x20,W ;# ">
-"52
-[; <"         MOVWF PORTD ;# ">
-"53
-[; <"         RETURN ;# ">
-"54
-[; ;gpio.c: 61: return;
-"61
+"37
+[; <"     BCF INTCON,2 ;# ">
+"38
+[; <"     MOVF PORTD,W ;# ">
+"39
+[; <"     XORLW 0b00010000 ;# ">
+"40
+[; <"     MOVWF PORTD ;# ">
+"41
+[; <"     RETURN ;# ">
+"42
+[; ;gpio.c: 45: return;
+"45
 [e $UE 139  ]
-[; ;gpio.c: 62: }
-"62
+[; ;gpio.c: 46: }
+"46
 [e :UE 139 ]
 }

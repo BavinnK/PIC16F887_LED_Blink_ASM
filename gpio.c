@@ -9,7 +9,6 @@
 #include <xc.h>
 #pragma config LVP = OFF
 #pragma config WDTE = OFF  
-#pragma config LVP = OFF   
 #pragma config FOSC = INTRC_NOCLKOUT 
 void main(void) {
     
@@ -26,7 +25,7 @@ void main(void) {
     BSF OPTION_REG,1
     BSF OPTION_REG,2    ;now the pcs is 256 now each tick takes 256 us
    
-    BCF TRISD,0         ;make RD0 as output
+    BCF TRISD,4         ;make RD4 as output, its a buildin led on my custom board
     BCF STATUS,5        ;BANK0
              
     MAIN_LOOP:
@@ -37,7 +36,7 @@ void main(void) {
     DISPLAY:
     BCF INTCON,2
     MOVF PORTD,W
-    XORLW 0X1
+    XORLW 0b00010000
     MOVWF PORTD
     RETURN
  
