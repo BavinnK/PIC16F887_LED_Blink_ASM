@@ -1,7 +1,7 @@
 
 
 Microchip Technology PIC LITE Macro Assembler V1.36 build -262312587 
-                                                                                               Thu Mar 12 22:11:35 2026
+                                                                                               Thu Mar 12 23:05:38 2026
 
 Microchip Technology Omniscient Code Generator v1.36 (Free mode) build 201601150325
      1                           	processor	16F887
@@ -100,7 +100,7 @@ Microchip Technology Omniscient Code Generator v1.36 (Free mode) build 201601150
     94                           
     95  07FC                     __end_of__initialization:	
     96  07FC  0183               	clrf	3
-    97  07FD  120A  118A  2FE6   	ljmp	_main	;jump to C main() function
+    97  07FD  120A  118A  2FDF   	ljmp	_main	;jump to C main() function
     98                           
     99                           	psect	cstackCOMMON
    100  0000                     __pcstackCOMMON:	
@@ -110,14 +110,14 @@ Microchip Technology Omniscient Code Generator v1.36 (Free mode) build 201601150
    104                           
    105                           
    106                           	psect	maintext
-   107  07E6                     __pmaintext:	
+   107  07DF                     __pmaintext:	
    108                           ; 1 bytes @ 0x0
    109 ;;
    110 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
    111 ;;
    112 ;; *************** function _main *****************
    113 ;; Defined at:
-   114 ;;		line 13 in file "gpio.c"
+   114 ;;		line 11 in file "gpio.c"
    115 ;; Parameters:    Size  Location     Type
    116 ;;		None
    117 ;; Auto vars:     Size  Location     Type
@@ -145,62 +145,72 @@ Microchip Technology Omniscient Code Generator v1.36 (Free mode) build 201601150
    139                           
    140                           
    141                           ;psect for function _main
-   142  07E6                     _main:	
-   143  07E6                     MAIN_INIT:	
+   142  07DF                     _main:	
+   143  07DF                     MAIN_INIT:	
    144                           ;incstack = 0
    145                           ; Regs used in _main: []
    146                           
    147                           
    148                           ;# 
-   149  07E6  1303               	bcf	3,6	;# 
-   150  07E7  1283               	bcf	3,5	;BANK0 ;# 
-   151  07E8  0181               	clrf	1	;clear the counter ;# 
-   152  07E9  1683               	bsf	3,5	;BANK1 ;# 
-   153  07EA  1281               	bcf	129,5	;we will use internal osc which is 4Mhz ;# 
-   154  07EB  1181               	bcf	129,3	;the pcs is assigned to timer0 itself not the watchdog ;# 
-   155  07EC  1401               	bsf	129,0	;# 
-   156  07ED  1481               	bsf	129,1	;# 
-   157  07EE  1501               	bsf	129,2	;now the pcs is 256 now each tick takes 256 us ;# 
-   158  07EF  1208               	bcf	136,4	;make RD4 as output, its a buildin led on my custom board ;# 
-   159  07F0  1283               	bcf	3,5	;BANK0 ;# 
-   160  07F1                     MAIN_LOOP:	
-   161                           
-   162                           ;# 
-   163  07F1  190B               	btfsc	11,2	;# 
-   164  07F2  27F4               	call	DISPLAY	;# 
-   165  07F3  2FF1               	goto	MAIN_LOOP	;# 
-   166  07F4                     DISPLAY:	
-   167                           
-   168                           ;# 
-   169  07F4  110B               	bcf	11,2	;# 
-   170  07F5  0808               	movf	8,w	;# 
-   171  07F6  3A10               	xorlw	16	;# 
-   172  07F7  0088               	movwf	8	;# 
-   173  07F8  0008               	return	;# 
-   174                           
-   175                           ;gpio.c: 45: return;
-   176  07F9  120A  118A  2800   	ljmp	start
-   177  07FC                     __end_of_main:	
-   178  007E                     btemp	set	126	;btemp
-   179  007E                     wtemp	set	126
-   180  007E                     wtemp0	set	126
-   181  0080                     wtemp1	set	128
-   182  0082                     wtemp2	set	130
-   183  0084                     wtemp3	set	132
-   184  0086                     wtemp4	set	134
-   185  0088                     wtemp5	set	136
-   186  007F                     wtemp6	set	127
-   187  007E                     ttemp	set	126
-   188  007E                     ttemp0	set	126
-   189  0081                     ttemp1	set	129
-   190  0084                     ttemp2	set	132
-   191  0087                     ttemp3	set	135
-   192  007F                     ttemp4	set	127
-   193  007E                     ltemp	set	126
-   194  007E                     ltemp0	set	126
-   195  0082                     ltemp1	set	130
-   196  0086                     ltemp2	set	134
-   197  0080                     ltemp3	set	128
+   149  07DF  1303               	bcf	3,6	;# 
+   150  07E0  1283               	bcf	3,5	;BANK0 ;# 
+   151  07E1  0181               	clrf	1	;clear the counter ;# 
+   152  07E2  1683               	bsf	3,5	;BANK1 ;# 
+   153  07E3  1281               	bcf	129,5	;we will use internal osc which is 4Mhz ;# 
+   154  07E4  1181               	bcf	129,3	;the pcs is assigned to timer0 itself not the watchdog ;# 
+   155  07E5  1401               	bsf	129,0	;# 
+   156  07E6  1481               	bsf	129,1	;# 
+   157  07E7  1501               	bsf	129,2	;now the pcs is 256 now each tick takes 256 us ;# 
+   158  07E8  1208               	bcf	136,4	;make RD4 as output, its a buildin led on my custom board ;# 
+   159  07E9  1283               	bcf	3,5	;BANK0 ;# 
+   160  07EA  01A1               	clrf	33	;# 
+   161  07EB                     MAIN_LOOP:	
+   162                           
+   163                           ;# 
+   164  07EB  190B               	btfsc	11,2	;# 
+   165  07EC  27EE               	call	DISPLAY	;# 
+   166  07ED  2FEB               	goto	MAIN_LOOP	;# 
+   167  07EE                     DISPLAY:	
+   168                           
+   169                           ;# 
+   170  07EE  110B               	bcf	11,2	;# 
+   171  07EF  0AA1               	incf	33,f	;# 
+   172  07F0  300F               	movlw	15	;# 
+   173  07F1  0221               	subwf	33,w	;# 
+   174  07F2  1903               	btfsc	3,2	;# 
+   175  07F3  27F5               	call	INC_LOGIC	;# 
+   176  07F4  0008               	return	;# 
+   177  07F5                     INC_LOGIC:	
+   178                           
+   179                           ;# 
+   180  07F5  01A1               	clrf	33	;# 
+   181  07F6  3010               	movlw	16	;# 
+   182  07F7  0688               	xorwf	8,f	;# 
+   183  07F8  0008               	return	;# 
+   184                           
+   185                           ;gpio.c: 50: return;
+   186  07F9  120A  118A  2800   	ljmp	start
+   187  07FC                     __end_of_main:	
+   188  007E                     btemp	set	126	;btemp
+   189  007E                     wtemp	set	126
+   190  007E                     wtemp0	set	126
+   191  0080                     wtemp1	set	128
+   192  0082                     wtemp2	set	130
+   193  0084                     wtemp3	set	132
+   194  0086                     wtemp4	set	134
+   195  0088                     wtemp5	set	136
+   196  007F                     wtemp6	set	127
+   197  007E                     ttemp	set	126
+   198  007E                     ttemp0	set	126
+   199  0081                     ttemp1	set	129
+   200  0084                     ttemp2	set	132
+   201  0087                     ttemp3	set	135
+   202  007F                     ttemp4	set	127
+   203  007E                     ltemp	set	126
+   204  007E                     ltemp0	set	126
+   205  0082                     ltemp1	set	130
+   206  0086                     ltemp2	set	134
+   207  0080                     ltemp3	set	128
 
 
 Data Sizes:
@@ -286,10 +296,10 @@ DATA                 0      0       0      12        0.0%
 
 
 Microchip Technology PIC Macro Assembler V1.36 build -262312587 
-Symbol Table                                                                                   Thu Mar 12 22:11:35 2026
+Symbol Table                                                                                   Thu Mar 12 23:05:38 2026
 
                      TMR0 0001              __CFG_LVP$OFF 0000                      PORTD 0008  
-                    TRISD 0088                      _main 07E6                      btemp 007E  
+                    TRISD 0088                      _main 07DF                      btemp 007E  
                     ltemp 007E                      start 0000                      ttemp 007E  
                     wtemp 007E                     INTCON 000B                     STATUS 0003  
                    ?_main 0000             __CFG_WDTE$OFF 0000                     ltemp0 007E  
@@ -299,8 +309,8 @@ Symbol Table                                                                    
                    wtemp0 007E                     wtemp1 0080                     wtemp2 0082  
                    wtemp3 0084                     wtemp4 0086                     wtemp5 0088  
                    wtemp6 007F           __initialization 07FC              __end_of_main 07FC  
-                  ??_main 0000                    DISPLAY 07F4   __end_of__initialization 07FC  
-          __pcstackCOMMON 0000                __pmaintext 07E6                 OPTION_REG 0081  
+                  ??_main 0000                    DISPLAY 07EE   __end_of__initialization 07FC  
+          __pcstackCOMMON 0000                __pmaintext 07DF                 OPTION_REG 0081  
     end_of_initialization 07FC       start_initialization 07FC  __CFG_FOSC$INTRC_NOCLKOUT 0000  
-                MAIN_INIT 07E6                  MAIN_LOOP 07F1                 ___latbits 0002  
-           __size_of_main 0016  
+                MAIN_INIT 07DF                  MAIN_LOOP 07EB                 ___latbits 0002  
+                INC_LOGIC 07F5             __size_of_main 001D  

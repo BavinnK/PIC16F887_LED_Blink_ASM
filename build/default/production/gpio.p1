@@ -1485,71 +1485,87 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic.h: 186: extern unsigned char __resetbits;
 [; ;pic.h: 187: extern __bit __powerdown;
 [; ;pic.h: 188: extern __bit __timeout;
-"10 gpio.c
+"8 gpio.c
 [p x LVP=OFF ]
-"11
+"9
 [p x WDTE=OFF ]
-"12
+"10
 [p x FOSC=INTRC_NOCLKOUT ]
-"13
+"11
 [v _main `(v ~T0 @X0 1 ef ]
 {
-[; ;gpio.c: 13: void main(void) {
+[; ;gpio.c: 11: void main(void) {
 [e :U _main ]
 [f ]
-"16
+"14
 [; <"     MAIN_INIT: ;# ">
-"17
+"15
 [; <"     BCF STATUS,6 ;# ">
-"18
+"16
 [; <"     BCF STATUS,5 ;BANK0 ;# ">
-"19
+"17
 [; <"     CLRF TMR0 ;clear the counter ;# ">
-"20
-"21
+"18
+"19
 [; <"         BSF STATUS,5 ;BANK1 ;# ">
-"22
+"20
 [; <"     BCF OPTION_REG,5 ;we will use internal osc which is 4Mhz ;# ">
-"23
+"21
 [; <"     BCF OPTION_REG,3 ;the pcs is assigned to timer0 itself not the watchdog ;# ">
-"24
+"22
 [; <"     BSF OPTION_REG,0 ;# ">
-"25
+"23
 [; <"     BSF OPTION_REG,1 ;# ">
-"26
+"24
 [; <"     BSF OPTION_REG,2 ;now the pcs is 256 now each tick takes 256 us ;# ">
-"27
-"28
+"25
+"26
 [; <"        BCF TRISD,4 ;make RD4 as output, its a buildin led on my custom board ;# ">
-"29
+"27
 [; <"     BCF STATUS,5 ;BANK0 ;# ">
+"28
+[; <"     CLRF 0x21 ;# ">
+"29
 "30
+[; <"         MAIN_LOOP: ;# ">
 "31
-[; <"                  MAIN_LOOP: ;# ">
-"32
 [; <"     BTFSC INTCON,2 ;# ">
-"33
+"32
 [; <"     CALL DISPLAY ;# ">
-"34
+"33
 [; <"     GOTO MAIN_LOOP ;# ">
+"34
 "35
+[; <"        DISPLAY: ;# ">
 "36
-[; <"         DISPLAY: ;# ">
-"37
 [; <"     BCF INTCON,2 ;# ">
+"37
+[; <"     INCF 0x21,F ;# ">
 "38
-[; <"     MOVF PORTD,W ;# ">
+[; <"     MOVLW 15 ;# ">
 "39
-[; <"     XORLW 0b00010000 ;# ">
+[; <"     SUBWF 0x21,W ;# ">
 "40
-[; <"     MOVWF PORTD ;# ">
+[; <"     BTFSC STATUS,2 ;# ">
 "41
-[; <"     RETURN ;# ">
+[; <"     CALL INC_LOGIC ;# ">
 "42
-[; ;gpio.c: 45: return;
+[; <"     RETURN ;# ">
+"43
+"44
+[; <"                 INC_LOGIC: ;# ">
 "45
-[e $UE 139  ]
-[; ;gpio.c: 46: }
+[; <"     CLRF 0x21 ;# ">
 "46
+[; <"     MOVLW 0b00010000 ;# ">
+"47
+[; <"     XORWF PORTD,F ;# ">
+"48
+[; <"     RETURN ;# ">
+[; ;gpio.c: 50: return;
+"50
+[e $UE 139  ]
+[; ;gpio.c: 51: }
+"51
 [e :UE 139 ]
 }

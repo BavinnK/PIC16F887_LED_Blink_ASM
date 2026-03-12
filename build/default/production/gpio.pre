@@ -2089,14 +2089,14 @@ extern __bit __powerdown;
 extern __bit __timeout;
 
 
-# 10 "gpio.c"
+# 8 "gpio.c"
 #pragma config LVP = OFF
 #pragma config WDTE = OFF
 #pragma config FOSC = INTRC_NOCLKOUT
 void main(void) {
 
 
-# 15
+# 13
 #asm
     MAIN_INIT:
     BCF STATUS,6
@@ -2112,20 +2112,27 @@ void main(void) {
 
        BCF TRISD,4 ;make RD4 as output, its a buildin led on my custom board
     BCF STATUS,5 ;BANK0
+    CLRF 0x21
 
-                 MAIN_LOOP:
+        MAIN_LOOP:
     BTFSC INTCON,2
     CALL DISPLAY
     GOTO MAIN_LOOP
 
-        DISPLAY:
+       DISPLAY:
     BCF INTCON,2
-    MOVF PORTD,W
-    XORLW 0b00010000
-    MOVWF PORTD
+    INCF 0x21,F
+    MOVLW 15
+    SUBWF 0x21,W
+    BTFSC STATUS,2
+    CALL INC_LOGIC
     RETURN
 
+                INC_LOGIC:
+    CLRF 0x21
+    MOVLW 0b00010000
+    XORWF PORTD,F
+    RETURN
 #endasm 
-
- return;
+return;
 }

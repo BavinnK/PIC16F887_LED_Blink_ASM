@@ -11,9 +11,9 @@
 [v _eecpymem eecpymem `(v  1 e 1 0 ]
 "39
 [v _memcpyee memcpyee `(v  1 e 1 0 ]
-"13 C:\Users\Bavin\MPLABXProjects\cc_pic887_gpio.X\gpio.c
+"11 C:\Users\Bavin\MPLABXProjects\cc_pic887_gpio.X\gpio.c
 [v _main main `(v  1 e 1 0 ]
 [v _main main `(v  1 e 1 0 ]
 {
-"46
+"51
 } 0
